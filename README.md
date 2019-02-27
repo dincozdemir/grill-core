@@ -54,16 +54,19 @@ Grill requires a firebase project with firestore enabled
 Configure grill-core as:
 
 ```
-  initialize({
-    firebaseConfig: {
-      apiKey: 'xxxx',
-      authDomain: 'xxx.firebaseapp.com',
-      databaseURL: 'https://xxx.firebaseio.com',
-      projectId: 'xxx',
-      storageBucket: 'xxx.appspot.com',
-      messagingSenderId: 'abc'
-    }
-  });
+import { initialize } from 'grill-core';
+
+initialize({
+  boardName: 'XRetro',
+  firebaseConfig: {
+    apiKey: 'xxxx',
+    authDomain: 'xxx.firebaseapp.com',
+    databaseURL: 'https://xxx.firebaseio.com',
+    projectId: 'xxx',
+    storageBucket: 'xxx.appspot.com',
+    messagingSenderId: 'abc'
+  }
+});
 ```
 
 Use grill-core in your component as:
