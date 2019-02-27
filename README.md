@@ -4,7 +4,7 @@ Grill is an infrastructure for collaborative dashboards run on a firestore datas
 
 ## Installation:
 
-`yarn add @grill/core`
+`yarn add grill-core`
 
 ## Usage
 
