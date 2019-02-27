@@ -11,46 +11,6 @@ const INITIAL_STATE = {
   editingCells: []
 };
 
-const INITIAL_STATE2 = {
-  board: {
-    name: 'air',
-    cells: {
-      1: {
-        id: 1,
-        content: 'Cell1',
-        votes: 0
-      },
-      2: {
-        id: 2,
-        content: 'Cell2',
-        votes: 1
-      },
-      3: {
-        id: 3,
-        content: 'Cell3',
-        votes: 3
-      },
-      byId: [1, 2, 3]
-    },
-    lanes: {
-      1: {
-        id: 1,
-        name: 'Went Well',
-        cells: [1, 2]
-      },
-      2: {
-        id: 2,
-        name: 'Bad',
-        cells: [3]
-      },
-      byId: [1, 2]
-    }
-  },
-  editingCells: {
-    1: 1
-  }
-};
-
 export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case ADD_CELL:
@@ -107,6 +67,7 @@ const editCellEnd = (state, { cellId, content }) => {
       content
     }
   };
+  // eslint-disable-next-line no-unused-vars
   const { [cellId]: temp, ...newEditingCells } = editingCells;
   const newState = {
     ...state,
