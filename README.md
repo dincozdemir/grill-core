@@ -1,5 +1,6 @@
-# grill-core
-
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/2143920/53520273-942e0600-3ad5-11e9-97c7-4601961de32a.png" width="300" title="hover text">
+</p>
 Grill is an infrastructure for collaborative dashboards run on a firestore datasource.
 
 ## Installation:
