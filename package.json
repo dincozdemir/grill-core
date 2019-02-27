@@ -1,5 +1,5 @@
 {
-  "name": "@grill/core",
+  "name": "grill-core",
   "version": "1.0.0",
   "description": "Core frontend structure for Grill.io application",
   "main": "dist/index.js",
