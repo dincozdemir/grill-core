@@ -10,15 +10,12 @@ describe('sessionReducer reducer', () => {
 
   it('should set user to store', () => {
     expect(
-      reducer(
-        {},
-        {
-          type: SESSION.LOGIN,
-          payload: {
-            name: 'dincozdemir'
-          }
+      reducer({} as any, {
+        type: SESSION.LOGIN,
+        payload: {
+          name: 'dincozdemir'
         }
-      )
+      })
     ).toEqual({
       user: {
         name: 'dincozdemir'
@@ -28,12 +25,9 @@ describe('sessionReducer reducer', () => {
 
   it('should remove user from store', () => {
     expect(
-      reducer(
-        {},
-        {
-          type: SESSION.LOGOUT
-        }
-      )
+      reducer({} as any, {
+        type: SESSION.LOGOUT
+      })
     ).toEqual({
       user: {}
     });

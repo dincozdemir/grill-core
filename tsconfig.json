@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "target": "es2015",
+    "module": "esnext",
+    "jsx": "react",
+    "lib": ["es2015", "dom"],
+    "outDir": "./dist",
+    "baseUrl": "",
+    "paths": {
+      "*": ["node_modules/@types/*", "*"]
+    }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

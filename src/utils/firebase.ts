@@ -1,11 +1,11 @@
-import firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 let boardRef;
 
 const getBoardRef = () => {
   if (!boardRef) {
-    initialize();
+    initialize({});
   }
   return boardRef;
 };
@@ -32,7 +32,7 @@ const listenToBoard = (board, onAddCallback) => {
 };
 
 const addAction = (board, action) => {
-  const createdAt = new firebase.firestore.Timestamp.now();
+  const createdAt = firebase.firestore.Timestamp.now();
   getBoardRef()
     .doc(board)
     .collection('actions')

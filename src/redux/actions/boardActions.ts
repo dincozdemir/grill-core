@@ -21,7 +21,7 @@ export const unListenToBoard = () => {
   listener && this.listener();
 };
 
-const onBoardChange = dispatch => action => {
+const onBoardChange = (dispatch, _someFillerArg) => action => {
   dispatch(action);
 };
 
