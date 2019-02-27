@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="https://user-images.githubusercontent.com/2143920/53520273-942e0600-3ad5-11e9-97c7-4601961de32a.png" width="300" title="hover text">
+  <img src="https://user-images.githubusercontent.com/2143920/53529837-39ed6f00-3aee-11e9-9b69-3e72e4aeb57c.png" width="270" title="hover text">
 </p>
 Grill is an infrastructure for collaborative dashboards run on a firestore datasource.
 
