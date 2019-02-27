@@ -11,7 +11,7 @@ Grill is an infrastructure for collaborative dashboards run on a firestore datas
 
 Import reducers as:
 
-```
+```js
 import { combineReducers } from 'redux';
 import { reducers } from 'grill-core';
 
@@ -20,7 +20,7 @@ export default combineReducers(reducers);
 
 Import actions as:
 
-```
+```js
 import { actions } from 'grill-core';
 const {
   listenToBoard,
@@ -43,7 +43,7 @@ export {
 
 Import selectors as:
 
-```
+```js
 import { selectors } from 'grill-core';
 const { boardSelector } = selectors;
 export {
@@ -54,7 +54,7 @@ export {
 Grill requires a firebase project with firestore enabled
 Configure grill-core as:
 
-```
+```js
   initialize({
     firebaseConfig: {
       apiKey: 'xxxx',
@@ -69,7 +69,7 @@ Configure grill-core as:
 
 Use grill-core in your component as:
 
-```
+```js
 import { connect } from 'react-redux';
 import { listenToBoard, unListenToBoard, addLane, addCell, editCellStart, editCellEnd } from '../../redux/actions';
 import { boardSelector } from '../../selectors';
@@ -83,7 +83,7 @@ export default connect(
 )(Board);
 ```
 
-```
+```js
 class Board extends React.Component {
   componentDidMount() {
     this.props.listenToBoard();
