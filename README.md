@@ -1,4 +1,4 @@
-# @grill/core
+# grill-core
 
 Grill is an infrastructure for collaborative dashboards run on a firestore datasource.
 
@@ -12,7 +12,7 @@ Import reducers as:
 
 ```
 import { combineReducers } from 'redux';
-import { reducers } from '@grill/core';
+import { reducers } from 'grill-core';
 
 export default combineReducers(reducers);
 ```
@@ -20,7 +20,7 @@ export default combineReducers(reducers);
 Import actions as:
 
 ```
-import { actions } from '@grill/core';
+import { actions } from 'grill-core';
 const {
   listenToBoard,
   unListenToBoard,
@@ -43,7 +43,7 @@ export {
 Import selectors as:
 
 ```
-import { selectors } from '@grill/core';
+import { selectors } from 'grill-core';
 const { boardSelector } = selectors;
 export {
   boardSelector
@@ -51,7 +51,7 @@ export {
 ```
 
 Grill requires a firebase project with firestore enabled
-Configure @grill/core as:
+Configure grill-core as:
 
 ```
   initialize({
@@ -66,7 +66,7 @@ Configure @grill/core as:
   });
 ```
 
-Use @grill/io in your component as:
+Use grill-core in your component as:
 
 ```
 import { connect } from 'react-redux';
