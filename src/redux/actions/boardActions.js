@@ -1,20 +1,15 @@
 import uuid from 'uuid/v1';
 
-import {
-  ADD_CELL,
-  ADD_LANE,
-  EDIT_CELL_START,
-  EDIT_CELL,
-  EDIT_CELL_END
-} from '../types';
+import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
 
-import * as db from '../../utils/firebase';
+import { getDb } from '../../store';
 
+const db = getDb();
 let listener;
 
 export const listenToBoard = () => (dispatch, getState) => {
   const { board } = getState();
-  listener = db.listenToBoard(board.name, onBoardChange(dispatch, getState));
+  listener = db.listenToBoard(board.name, onBoardChange(dispatch));
 };
 
 export const unListenToBoard = () => {

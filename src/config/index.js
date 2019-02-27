@@ -1,7 +1,7 @@
-import * as firebase from '../utils/firebase';
+import store from '../store';
 
 const initialize = ({ firebaseConfig }) => {
-  firebase.initialize(firebaseConfig);
+  store.initialize(firebaseConfig);
 };
 
 export default initialize;
