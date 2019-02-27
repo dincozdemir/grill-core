@@ -1,17 +1,13 @@
 let onAddCallback;
 
-const initialize = config => {
-  console.log('Store simulation - Configure board');
-};
+const initialize = () => {};
 
 const listenToBoard = (board, onAddCallback) => {
   this.onAddCallback = onAddCallback;
-  console.log('Store simulation - Listening board');
-  return () => console.log('Store simulation - Board unlistened');
+  return () => {};
 };
 
 const addAction = (board, action) => {
-  console.log(`Store simulation - Add action: ${action.type}`);
   onAddCallback(action);
 };
 
