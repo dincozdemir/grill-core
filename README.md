@@ -1,5 +1,6 @@
-# grill-core
-
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/2143920/53529837-39ed6f00-3aee-11e9-9b69-3e72e4aeb57c.png" width="270" title="hover text">
+</p>
 Grill is an infrastructure for collaborative dashboards run on a firestore datasource.
 
 ## Installation:
@@ -10,7 +11,7 @@ Grill is an infrastructure for collaborative dashboards run on a firestore datas
 
 Import reducers as:
 
-```
+```js
 import { combineReducers } from 'redux';
 import { reducers } from 'grill-core';
 
@@ -19,7 +20,7 @@ export default combineReducers(reducers);
 
 Import actions as:
 
-```
+```js
 import { actions } from 'grill-core';
 const {
   listenToBoard,
@@ -37,23 +38,21 @@ export {
   addCell,
   editCellStart,
   editCellEnd
-}
+};
 ```
 
 Import selectors as:
 
-```
+```js
 import { selectors } from 'grill-core';
 const { boardSelector } = selectors;
-export {
-  boardSelector
-};
+export { boardSelector };
 ```
 
 Grill requires a firebase project with firestore enabled
 Configure grill-core as:
 
-```
+```js
 import { initialize } from 'grill-core';
 
 initialize({
@@ -71,9 +70,16 @@ initialize({
 
 Use grill-core in your component as:
 
-```
+```js
 import { connect } from 'react-redux';
-import { listenToBoard, unListenToBoard, addLane, addCell, editCellStart, editCellEnd } from '../../redux/actions';
+import {
+  listenToBoard,
+  unListenToBoard,
+  addLane,
+  addCell,
+  editCellStart,
+  editCellEnd
+} from '../../redux/actions';
 import { boardSelector } from '../../selectors';
 import Board from './Board';
 
@@ -81,11 +87,18 @@ export default connect(
   state => ({
     board: boardSelector(state)
   }),
-  { listenToBoard, unListenToBoard, addLane, addCell, editCellStart, editCellEnd }
+  {
+    listenToBoard,
+    unListenToBoard,
+    addLane,
+    addCell,
+    editCellStart,
+    editCellEnd
+  }
 )(Board);
 ```
 
-```
+```js
 class Board extends React.Component {
   componentDidMount() {
     this.props.listenToBoard();

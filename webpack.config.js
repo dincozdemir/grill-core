@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   output: {
     filename: 'index.js',
     library: 'grillCore',
