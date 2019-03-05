@@ -49,7 +49,7 @@ const { boardSelector } = selectors;
 export { boardSelector };
 ```
 
-Grill requires a firebase project with firestore enabled
+Grill requires a firebase project with firestore enabled  
 Configure grill-core as:
 
 ```js
