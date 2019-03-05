@@ -1,5 +1,10 @@
 import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
 
+interface Action {
+  type: string;
+  payload: object;
+}
+
 const INITIAL_STATE = {
   name: 'air',
   cells: {
@@ -11,7 +16,8 @@ const INITIAL_STATE = {
   editingCells: []
 };
 
-export default (state = INITIAL_STATE, { type, payload }) => {
+export default (state = INITIAL_STATE, action: Action) => {
+  const { type, payload } = action;
   switch (type) {
     case ADD_CELL:
       return addCell(state, payload);
@@ -26,7 +32,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
   }
 };
 
-const addCell = (state, { laneId, cell }) => {
+const addCell = (state: any, { laneId, cell }: any) => {
   const cells = {
     ...state.cells,
     [cell.id]: cell,
@@ -38,7 +44,7 @@ const addCell = (state, { laneId, cell }) => {
   return { ...state, cells, lanes };
 };
 
-const addLane = (state, { lane }) => {
+const addLane = (state: any, { lane }: any) => {
   const lanes = {
     ...state.lanes,
     [lane.id]: lane,
@@ -47,7 +53,7 @@ const addLane = (state, { lane }) => {
   return { ...state, lanes };
 };
 
-const editCellStart = (state, { cellId, userId = 1 /** TODO */ }) => {
+const editCellStart = (state: any, { cellId, userId = 1 /** TODO */ }: any) => {
   if (state.editingCells[cellId]) {
     return state;
   }
@@ -58,7 +64,7 @@ const editCellStart = (state, { cellId, userId = 1 /** TODO */ }) => {
   };
 };
 
-const editCellEnd = (state, { cellId, content }) => {
+const editCellEnd = (state: any, { cellId, content }: any) => {
   const { editingCells, cells } = state;
   const newCells = {
     ...cells,

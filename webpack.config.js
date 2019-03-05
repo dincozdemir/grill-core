@@ -1,18 +1,23 @@
-export default {
-  output: {
-    filename: 'index.js',
-    library: 'grillCore',
-    libraryTarget: 'umd'
-  },
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        test: /\.tsx?$/,
+        use: 'awesome-typescript-loader',
+        exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
+  },
+  output: {
+    filename: 'index.js',
+    library: 'grillCore',
+    libraryTarget: 'umd',
+    path: path.resolve(__dirname, 'dist')
   }
 };
