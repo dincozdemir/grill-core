@@ -2,25 +2,27 @@ import uuid from 'uuid/v1';
 
 import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
 
-import { getDb } from '../../store';
+import { db } from '../../store';
 
-const db = getDb();
-let listener;
+let listener: any;
 
-export const listenToBoard = () => (dispatch, getState) => {
+export const listenToBoard = () => (dispatch: any, getState: any) => {
   const { board } = getState();
   listener = db.listenToBoard(board.name, onBoardChange(dispatch));
 };
 
 export const unListenToBoard = () => {
-  listener && this.listener();
+  listener && listener();
 };
 
-const onBoardChange = dispatch => action => {
+const onBoardChange = (dispatch: any) => (action: any) => {
   dispatch(action);
 };
 
-export const addLane = ({ laneName }) => (dispatch, getState) => {
+export const addLane = ({ laneName }: any) => (
+  dispatch: any,
+  getState: any
+) => {
   const { board } = getState();
   const id = uuid();
   db.addAction(board.name, {
@@ -31,7 +33,7 @@ export const addLane = ({ laneName }) => (dispatch, getState) => {
   });
 };
 
-export const addCell = ({ laneId }) => (dispatch, getState) => {
+export const addCell = ({ laneId }: any) => (dispatch: any, getState: any) => {
   const { board } = getState();
   db.addAction(board.name, {
     type: ADD_CELL,
@@ -46,7 +48,10 @@ export const addCell = ({ laneId }) => (dispatch, getState) => {
   });
 };
 
-export const editCellStart = ({ cellId, userId }) => (dispatch, getState) => {
+export const editCellStart = ({ cellId, userId }: any) => (
+  dispatch: any,
+  getState: any
+) => {
   const { board } = getState();
   if (!board.editingCells[cellId]) {
     db.addAction(board.name, {
@@ -59,7 +64,10 @@ export const editCellStart = ({ cellId, userId }) => (dispatch, getState) => {
   }
 };
 
-export const editCellEnd = ({ cellId, content }) => (dispatch, getState) => {
+export const editCellEnd = ({ cellId, content }: any) => (
+  dispatch: any,
+  getState: any
+) => {
   const { board } = getState();
   db.addAction(board.name, {
     type: EDIT_CELL_END,
