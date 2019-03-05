@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 
 import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
 
