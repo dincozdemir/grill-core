@@ -1,4 +1,10 @@
-import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
+import {
+  ADD_CELL,
+  REMOVE_CELL,
+  ADD_LANE,
+  EDIT_CELL_START,
+  EDIT_CELL_END
+} from '../types';
 
 interface Action {
   type: string;
@@ -21,6 +27,8 @@ export default (state = INITIAL_STATE, action: Action) => {
   switch (type) {
     case ADD_CELL:
       return addCell(state, payload);
+    case REMOVE_CELL:
+      return removeCell(state, payload);
     case ADD_LANE:
       return addLane(state, payload);
     case EDIT_CELL_START:
@@ -30,6 +38,19 @@ export default (state = INITIAL_STATE, action: Action) => {
     default:
       return state;
   }
+};
+
+const removeCell = (state: any, { laneId, cellId }: any) => {
+  // eslint-disable-next-line no-unused-vars
+  const { [cellId]: temp, ...cells } = state.cells;
+  const lanes = { ...state.lanes };
+
+  var index = lanes[laneId].cells.indexOf(cellId);
+  if (index > -1) {
+    lanes[laneId].cells.splice(index, 1);
+  }
+
+  return { ...state, cells, lanes };
 };
 
 const addCell = (state: any, { laneId, cell }: any) => {
