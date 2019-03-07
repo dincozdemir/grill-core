@@ -5,12 +5,12 @@ export class LocalDb implements IBoardStore {
 
   initialize = () => {};
 
-  listenToBoard = (board: any, onAddCallback: any) => {
+  listenToBoard = (onAddCallback: any) => {
     this.onAddCallback = onAddCallback;
     return () => {};
   };
 
-  addAction = (board: any, action: any) => {
+  addAction = (action: any) => {
     this.onAddCallback(action);
   };
 }

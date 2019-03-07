@@ -12,9 +12,8 @@ import { db } from '../../store';
 
 let listener: any;
 
-export const listenToBoard = () => (dispatch: any, getState: any) => {
-  const { board } = getState();
-  listener = db.listenToBoard(board.name, onBoardChange(dispatch));
+export const listenToBoard = () => (dispatch: any) => {
+  listener = db.listenToBoard(onBoardChange(dispatch));
 };
 
 export const unListenToBoard = () => {
@@ -25,13 +24,9 @@ const onBoardChange = (dispatch: any) => (action: any) => {
   dispatch(action);
 };
 
-export const addLane = ({ laneName }: any) => (
-  dispatch: any,
-  getState: any
-) => {
-  const { board } = getState();
+export const addLane = ({ laneName }: any) => () => {
   const id = uuid();
-  db.addAction(board.name, {
+  db.addAction({
     type: ADD_LANE,
     payload: {
       lane: { id, name: laneName, cells: [] }
@@ -39,9 +34,8 @@ export const addLane = ({ laneName }: any) => (
   });
 };
 
-export const addCell = ({ laneId }: any) => (dispatch: any, getState: any) => {
-  const { board } = getState();
-  db.addAction(board.name, {
+export const addCell = ({ laneId }: any) => () => {
+  db.addAction({
     type: ADD_CELL,
     payload: {
       laneId,
@@ -54,12 +48,8 @@ export const addCell = ({ laneId }: any) => (dispatch: any, getState: any) => {
   });
 };
 
-export const removeCell = ({ laneId, cellId }: any) => (
-  dispatch: any,
-  getState: any
-) => {
-  const { board } = getState();
-  db.addAction(board.name, {
+export const removeCell = ({ laneId, cellId }: any) => () => {
+  db.addAction({
     type: REMOVE_CELL,
     payload: {
       laneId,
@@ -74,7 +64,7 @@ export const editCellStart = ({ cellId, userId }: any) => (
 ) => {
   const { board } = getState();
   if (!board.editingCells[cellId]) {
-    db.addAction(board.name, {
+    db.addAction({
       type: EDIT_CELL_START,
       payload: {
         cellId,
@@ -84,12 +74,8 @@ export const editCellStart = ({ cellId, userId }: any) => (
   }
 };
 
-export const editCellEnd = ({ cellId, content }: any) => (
-  dispatch: any,
-  getState: any
-) => {
-  const { board } = getState();
-  db.addAction(board.name, {
+export const editCellEnd = ({ cellId, content }: any) => () => {
+  db.addAction({
     type: EDIT_CELL_END,
     payload: {
       cellId,

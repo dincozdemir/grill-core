@@ -1,24 +1,25 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
-import { IBoardStore, IFirebaseConfig } from '../../types';
+import { IBoardStore, IConfig } from '../../types';
 
 export class FirestoreDb implements IBoardStore {
-  boardRef: any;
+  actionsRef: any;
 
-  getBoardRef = () => {
-    return this.boardRef;
+  getActionsRef = () => {
+    return this.actionsRef;
   };
 
-  initialize = (config: IFirebaseConfig) => {
-    firebase.initializeApp(config);
+  initialize = (config: IConfig) => {
+    firebase.initializeApp(config.firebaseConfig);
     const db = firebase.firestore();
-    this.boardRef = db.collection('boards');
+    this.actionsRef = db
+      .collection('boards')
+      .doc(config.boardName)
+      .collection('actions');
   };
 
-  listenToBoard = (board: string, onAddCallback: any) =>
-    this.getBoardRef()
-      .doc(board)
-      .collection('actions')
+  listenToBoard = (onAddCallback: any) =>
+    this.getActionsRef()
       .orderBy('createdAt', 'asc')
       .onSnapshot((doc: any) => {
         doc
@@ -29,13 +30,10 @@ export class FirestoreDb implements IBoardStore {
           });
       });
 
-  addAction = (board: string, action: object) => {
-    this.getBoardRef()
-      .doc(board)
-      .collection('actions')
-      .add({
-        ...action,
-        createdAt: firebase.firestore.Timestamp.now()
-      });
+  addAction = (action: object) => {
+    this.getActionsRef().add({
+      ...action,
+      createdAt: firebase.firestore.Timestamp.now()
+    });
   };
 }

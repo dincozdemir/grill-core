@@ -1,4 +1,5 @@
 import { IFirebaseConfig } from './IFirebaseConfig';
 import { IBoardStore } from './IBoardStore';
+import { IConfig } from './IConfig';
 
-export { IFirebaseConfig, IBoardStore };
+export { IFirebaseConfig, IBoardStore, IConfig };

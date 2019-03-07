@@ -1,16 +1,16 @@
 import { FirestoreDb } from './firestore';
 import { LocalDb } from './local';
-import { IFirebaseConfig, IBoardStore } from '../../types';
+import { IConfig, IBoardStore } from '../../types';
 
 let firestoreDb: FirestoreDb;
 let localDb: LocalDb;
 
 let db: IBoardStore;
 
-function initialize(firebaseConfig?: IFirebaseConfig) {
-  if (firebaseConfig) {
+function initialize(config: IConfig) {
+  if (config.firebaseConfig) {
     firestoreDb = new FirestoreDb();
-    firestoreDb.initialize(firebaseConfig);
+    firestoreDb.initialize(config);
     db = firestoreDb;
   } else {
     localDb = new LocalDb();
