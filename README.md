@@ -27,6 +27,7 @@ const {
   unListenToBoard,
   addLane,
   addCell,
+  removeCell,
   editCellStart,
   editCellEnd
 } = actions;
@@ -36,6 +37,7 @@ export {
   unListenToBoard,
   addLane,
   addCell,
+  removeCell,
   editCellStart,
   editCellEnd
 };
@@ -77,6 +79,7 @@ import {
   unListenToBoard,
   addLane,
   addCell,
+  removeCell,
   editCellStart,
   editCellEnd
 } from '../../redux/actions';
@@ -92,6 +95,7 @@ export default connect(
     unListenToBoard,
     addLane,
     addCell,
+    removeCell,
     editCellStart,
     editCellEnd
   }
