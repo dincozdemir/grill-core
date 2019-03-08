@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 const allLanesSelector = (state: any) => state.board.lanes;
 const allCellsSelector = (state: any) => state.board.cells;
+const editingCellsSelector = (state: any) => state.board.editingCells;
 
 const lanesSelector = createSelector(
   allLanesSelector,
@@ -11,9 +12,13 @@ const lanesSelector = createSelector(
 export const boardSelector = createSelector(
   lanesSelector,
   allCellsSelector,
-  (lanes, cells) =>
+  editingCellsSelector,
+  (lanes, cells, editingCells) =>
     lanes.map((lane: any) => ({
       ...lane,
-      cells: lane.cells.map((cellId: string) => cells[cellId])
+      cells: lane.cells.map((cellId: string) => ({
+        ...cells[cellId],
+        editingBy: editingCells[cellId]
+      }))
     }))
 );
