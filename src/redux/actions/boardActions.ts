@@ -24,12 +24,12 @@ const onBoardChange = (dispatch: any) => (action: any) => {
   dispatch(action);
 };
 
-export const addLane = ({ laneName }: any) => () => {
+export const addLane = (lane: any) => () => {
   const id = uuid();
   db.addAction({
     type: ADD_LANE,
     payload: {
-      lane: { id, name: laneName, cells: [] }
+      lane: { ...lane, id, cells: [] }
     }
   });
 };
