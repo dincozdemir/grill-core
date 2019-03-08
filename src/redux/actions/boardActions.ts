@@ -1,6 +1,12 @@
 import { v1 as uuid } from 'uuid';
 
-import { ADD_CELL, ADD_LANE, EDIT_CELL_START, EDIT_CELL_END } from '../types';
+import {
+  ADD_CELL,
+  REMOVE_CELL,
+  ADD_LANE,
+  EDIT_CELL_START,
+  EDIT_CELL_END
+} from '../types';
 
 import { db } from '../../store';
 
@@ -44,6 +50,20 @@ export const addCell = ({ laneId }: any) => (dispatch: any, getState: any) => {
         content: '',
         votes: 0
       }
+    }
+  });
+};
+
+export const removeCell = ({ laneId, cellId }: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  const { board } = getState();
+  db.addAction(board.name, {
+    type: REMOVE_CELL,
+    payload: {
+      laneId,
+      cellId
     }
   });
 };
