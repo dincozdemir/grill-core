@@ -3,7 +3,8 @@ import {
   REMOVE_CELL,
   ADD_LANE,
   EDIT_CELL_START,
-  EDIT_CELL_END
+  EDIT_CELL_END,
+  REMOVE_LANE
 } from '../types';
 
 interface Action {
@@ -12,9 +13,7 @@ interface Action {
 }
 
 const INITIAL_STATE = {
-  cells: {
-    byId: []
-  },
+  cells: {},
   lanes: {
     byId: []
   },
@@ -34,9 +33,22 @@ export default (state = INITIAL_STATE, action: Action) => {
       return editCellStart(state, payload);
     case EDIT_CELL_END:
       return editCellEnd(state, payload);
+    case REMOVE_LANE:
+      return removeLane(state, payload);
     default:
       return state;
   }
+};
+
+const addCell = (state: any, { laneId, cell }: any) => {
+  const cells = {
+    ...state.cells,
+    [cell.id]: cell
+  };
+  const lanes = { ...state.lanes };
+
+  lanes[laneId].cells.push(cell.id);
+  return { ...state, cells, lanes };
 };
 
 const removeCell = (state: any, { laneId, cellId }: any) => {
@@ -52,18 +64,6 @@ const removeCell = (state: any, { laneId, cellId }: any) => {
   return { ...state, cells, lanes };
 };
 
-const addCell = (state: any, { laneId, cell }: any) => {
-  const cells = {
-    ...state.cells,
-    [cell.id]: cell,
-    byId: [...state.cells.byId, cell.id]
-  };
-  const lanes = { ...state.lanes };
-
-  lanes[laneId].cells.push(cell.id);
-  return { ...state, cells, lanes };
-};
-
 const addLane = (state: any, { lane }: any) => {
   const lanes = {
     ...state.lanes,
@@ -73,7 +73,24 @@ const addLane = (state: any, { lane }: any) => {
   return { ...state, lanes };
 };
 
-const editCellStart = (state: any, { cellId, userId = 1 /** TODO */ }: any) => {
+const removeLane = (state: any, { laneId }: any) => {
+  // eslint-disable-next-line no-unused-vars
+  const { [laneId]: temp, ...lanes } = state.lanes;
+  const byId = [...state.lanes.byId];
+  const index = byId.indexOf(laneId);
+  if (index > -1) {
+    byId.splice(index, 1);
+    return {
+      ...state,
+      lanes: {
+        lanes,
+        byId
+      }
+    };
+  }
+};
+
+const editCellStart = (state: any, { cellId, userId }: any) => {
   if (state.editingCells[cellId]) {
     return state;
   }

@@ -5,7 +5,8 @@ import {
   REMOVE_CELL,
   ADD_LANE,
   EDIT_CELL_START,
-  EDIT_CELL_END
+  EDIT_CELL_END,
+  REMOVE_LANE
 } from '../types';
 
 import { db } from '../../store';
@@ -34,6 +35,15 @@ export const addLane = (lane: any) => () => {
   });
 };
 
+export const removeLane = ({ laneId }: any) => () => {
+  db.addAction({
+    type: REMOVE_LANE,
+    payload: {
+      laneId
+    }
+  });
+};
+
 export const addCell = ({ laneId, cell }: any) => () => {
   db.addAction({
     type: ADD_CELL,
@@ -58,7 +68,6 @@ export const removeCell = ({ laneId, cellId }: any) => () => {
     }
   });
 };
-
 export const editCellStart = ({ cellId, userId }: any) => (
   dispatch: any,
   getState: any

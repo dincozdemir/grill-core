@@ -6,3 +6,4 @@ export const EDIT_CELL = 'EDIT_CELL';
 export const EDIT_CELL_END = 'EDIT_CELL_END';
 
 export const REMOVE_CELL = 'REMOVE_CELL';
+export const REMOVE_LANE = 'REMOVE_LANE';
