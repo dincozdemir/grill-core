@@ -34,12 +34,13 @@ export const addLane = (lane: any) => () => {
   });
 };
 
-export const addCell = ({ laneId }: any) => () => {
+export const addCell = ({ laneId, cell }: any) => () => {
   db.addAction({
     type: ADD_CELL,
     payload: {
       laneId,
       cell: {
+        ...cell,
         id: uuid(),
         content: '',
         votes: 0

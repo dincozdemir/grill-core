@@ -12,7 +12,6 @@ interface Action {
 }
 
 const INITIAL_STATE = {
-  name: 'air',
   cells: {
     byId: []
   },
