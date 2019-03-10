@@ -10,7 +10,9 @@ export class FirestoreDb implements IBoardStore {
   };
 
   initialize = (config: IConfig) => {
-    firebase.initializeApp(config.firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config.firebaseConfig);
+    }
     const db = firebase.firestore();
     this.actionsRef = db
       .collection('boards')
