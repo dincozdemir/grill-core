@@ -74,6 +74,7 @@ const addLane = (state: any, { lane }: any) => {
 };
 
 const removeLane = (state: any, { laneId }: any) => {
+  /** Work in Progress
   // eslint-disable-next-line no-unused-vars
   const { [laneId]: temp, ...lanes } = state.lanes;
   const byId = [...state.lanes.byId];
@@ -87,7 +88,8 @@ const removeLane = (state: any, { laneId }: any) => {
         byId
       }
     };
-  }
+  } */
+  return state;
 };
 
 const editCellStart = (state: any, { cellId, userId }: any) => {
