@@ -15,5 +15,5 @@ export default {
     },
     byId: [123, 234]
   },
-  editingCells: [{ 111: 1 }]
+  editingCells: { 111: 1 }
 };

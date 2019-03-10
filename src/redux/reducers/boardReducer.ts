@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   lanes: {
     byId: []
   },
-  editingCells: []
+  editingCells: {}
 };
 
 export default (state = INITIAL_STATE, action: Action) => {
@@ -45,11 +45,14 @@ const addCell = (state: any, { laneId, cell }: any) => {
     ...state.cells,
     [cell.id]: cell
   };
-  const lanes = { ...state.lanes };
-  lanes[laneId].cells.push(cell.id);
+  const lane = {
+    ...state.lanes[laneId],
+    cells: [...state.lanes[laneId].cells, cell.id]
+  };
+  const lanes = { ...state.lanes, [laneId]: lane };
 
   const editingCells = cell.user
-    ? [...state.editingCells, { [cell.id]: cell.user.id }]
+    ? { ...state.editingCells, [cell.id]: cell.user.id }
     : state.editingCells;
   return { ...state, cells, lanes, editingCells };
 };
@@ -77,22 +80,39 @@ const addLane = (state: any, { lane }: any) => {
 };
 
 const removeLane = (state: any, { laneId }: any) => {
-  /** Work in Progress
+  // Remove lane from lanes
   // eslint-disable-next-line no-unused-vars
   const { [laneId]: temp, ...lanes } = state.lanes;
-  const byId = [...state.lanes.byId];
-  const index = byId.indexOf(laneId);
-  if (index > -1) {
-    byId.splice(index, 1);
-    return {
-      ...state,
-      lanes: {
-        lanes,
-        byId
+  const newLanes = {
+    ...lanes,
+    byId: state.lanes.byId.filter(id => id !== laneId)
+  };
+  // Remove cells that were in this lane
+  const newCells = Object.keys(state.cells).reduce((result, cellId) => {
+    if (!state.lanes[laneId].cells.includes(cellId)) {
+      result[cellId] = { ...state.cells[cellId] };
+    }
+    return result;
+  }, {});
+
+  // Remove cells from editingCells
+  const newEditingCells = Object.keys(state.editingCells).reduce(
+    (result, cellId) => {
+      if (newCells[cellId]) {
+        result[cellId] = state.editingCells[cellId];
       }
-    };
-  } */
-  return state;
+      return result;
+    },
+    {}
+  );
+
+  const newState = {
+    ...state,
+    lanes: newLanes,
+    cells: newCells,
+    editingCells: newEditingCells
+  };
+  return newState;
 };
 
 const editCellStart = (state: any, { cellId, userId }: any) => {
