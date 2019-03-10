@@ -46,9 +46,12 @@ const addCell = (state: any, { laneId, cell }: any) => {
     [cell.id]: cell
   };
   const lanes = { ...state.lanes };
-
   lanes[laneId].cells.push(cell.id);
-  return { ...state, cells, lanes };
+
+  const editingCells = cell.user
+    ? [...state.editingCells, { [cell.id]: cell.user.id }]
+    : state.editingCells;
+  return { ...state, cells, lanes, editingCells };
 };
 
 const removeCell = (state: any, { laneId, cellId }: any) => {
